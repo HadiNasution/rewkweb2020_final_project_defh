@@ -1,0 +1,318 @@
+@font-face {
+    font-family: brandFont;
+    src: url('../assets/font/Winterland.ttf');
+}
+
+@font-face {
+    font-family: quoteFont;
+    src: url('../assets/font/Oswald.ttf');
+}
+
+#sub-title{
+    color: dimgray;
+    font-size: 20px;
+}
+
+
+/*---- Navbar ----*/
+#nav-brand{
+    font-family: brandFont;
+    font-weight: 500;
+    font-size: 80px;
+    margin-top: 20px;
+    margin-right: 50px;
+}
+
+#navbarNav{
+    margin-top: -30px;
+}
+
+.nav-item{
+    margin-right: 30px;
+    margin-top: 70px;
+    font-size: 16px;
+}
+
+#login{
+    color: dodgerblue;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#login:hover{
+    color:rgb(0, 109, 218);
+}
+
+#logout{
+    color: dimgray;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#logout:hover{
+    color:red;
+}
+
+#btn-login{
+    margin-left: 20px;
+    margin-top: 75px;
+}
+
+#cart{
+    color: black;
+    font-size:24px; 
+    margin-top:8px;
+    margin-left: 40px;
+}
+
+#cart:hover{
+    color: dodgerblue;
+}
+
+/*---- Footer ----*/
+#footer{
+    margin-top: 100px;
+}
+
+/*---- Home ----*/
+#home-quote{
+    font-size: 150px;
+    font-weight: bold;
+    font-family: quoteFont;
+}
+
+#mid-quote{
+    color: indigo;
+}
+
+#btn-shop{
+    font-size: 25px;
+}
+
+#hero-img{
+    margin-top: -90px;
+    margin-left: 200px;
+}
+
+/*---- Categories ----*/
+
+
+/*---- Shop ----*/
+#harga-shop{
+    font-size: 25px; 
+    text-decoration:none; 
+    color:forestgreen;
+}
+
+#btn-buy-shop{
+    text-decoration:none; 
+    color:rgb(0, 89, 255);
+    margin-left:60px;
+}
+
+
+/*---- new arrival ----*/
+#label-new{
+    color: black;
+}
+
+#harga-new{
+    font-size: 25px; 
+    text-decoration:none; 
+    color:forestgreen;
+}
+
+#btn-buy-new{
+    text-decoration:none; 
+    color:rgb(0, 89, 255); 
+    margin-left:50px;
+}
+
+/*---- About ----*/
+#about{
+    font-size: 20px;
+}
+
+#title-about{
+    font-size: 25px;
+    color: dimgray;
+    margin-top: 50px;
+}
+
+#brand{
+    font-family: brandFont;
+    font-size: 100px;
+}
+
+#img1{
+    position:relative; 
+    margin-top: 80px;
+    margin-left: 100px;
+    top:10px; 
+    left:80px; 
+    z-index:2;
+}
+
+#img2{
+    position:relative; 
+    margin-top: -100px;
+    margin-left: 50px;
+    top:-60px; 
+    left:35px; 
+    z-index:1;
+}
+
+#img3{
+    position:relative; 
+    top:-120px; 
+    left:120px; 
+    z-index:3;
+    margin-bottom: -200px;
+}
+
+.sosmed{
+    margin: 10px;
+    margin-left: -5px;
+    text-decoration: none;
+    color: dimgray;
+}
+
+.icon-sosmed{
+    margin: 10px;
+}
+
+.alamat{
+    color: dimgray;
+    font-size: 20px;
+}
+
+#btn-alamat{
+    margin-top: 15px;
+}
+
+/*---- Contact ----*/
+.vertical-line {
+    border-left: 1px solid rgb(179, 179, 179);
+    height: 450px;
+    position: absolute;
+}
+
+.sosmed-group{
+    margin-top: 50px;
+    margin-left: 150px;
+}
+
+.sosmed-contact{
+    margin: 30px;
+    margin-left: -5px;
+    text-decoration: none;
+    color: dimgray;
+    font-size: 30px;
+}
+
+.icon-sosmed-contact{
+    margin: 30px;
+}
+
+/*---- Login ----*/
+.form-regist{
+    margin-left: 40px;
+}
+
+.vertical-line-login {
+    border-left: 1px solid rgb(179, 179, 179);
+    height: 550px;
+    position: absolute;
+}
+
+/*---- Dashboard ----*/
+.table > tbody > tr > * {
+    vertical-align: middle;
+}
+
+/*---- Detail ----*/
+.detail-product{
+    margin-left: 60px;
+    margin-top: 40px;
+}
+
+#nama-detail{
+    margin-bottom: 30px;
+}
+
+#harga-detail{
+    margin-top: 30px;
+}
+
+#back-to-list-product{
+    text-decoration: none;
+    color: dimgray;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+#back-to-list-product:hover{
+    color: dodgerblue;
+}
+
+.btn-action{
+    margin-top: 25px
+}
+
+#icon-back-detail{
+    font-size: 25px;
+    color: dimgray;
+}
+
+/*---- Detail Produk ----*/
+#lapis-blue {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: rgb(36, 122, 180);
+}
+
+#primsoe-yellow {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: rgb(255, 196, 0);
+}
+
+#dimgray {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: rgb(172, 172, 172);
+}
+
+#black {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: black;
+}
+
+#btn_keranjang{
+    font-size: 20px;
+}
+
+.ket-harga{
+    font-size: 30px;
+    color: dimgray;
+}
+
+.form-check-label{
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.form-check-input{
+    margin-top: 8px;
+}
+
+#diskon{
+    font-size: 20px;
+}

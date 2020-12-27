@@ -1,0 +1,14 @@
+Assets 
+	shop - banner1.jpg - https://wedesignthemes.com/html/vm/fullwidth-page.html
+	shop - banner2/2.jpg - https://3second.co.id/threesecond/
+	home - hero-img - https://unsplash.com/photos/MZtHhOaPsmM
+	categories - shoes.jpg - https://unsplash.com/photos/mWYhrOiAgmA
+	categories - clothes.jpeg - https://unsplash.com/photos/ojZ4wJNUM5w
+	categories - pants.jpg - https://unsplash.com/photos/5YnSx_EQlN8
+	categories - bags.jpeg - https://unsplash.com/s/photos/bags
+	about - instagram, facebook, tiktok - https://www.flaticon.com/free-icon/tik-tok_3046121
+	about - map - https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cssscript.com%2Fsimple-location-picker-javascript-google-maps%2F&psig=AOvVaw3a33pKnuXFA20BaEfp3r_n&ust=1608394688209000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCKjZ751-0CFQAAAAAdAAAAABAD
+	product - clothes - https://3second.co.id/threesecond/3second/ladies.html
+	product - shoes - https://3second.co.id/threesecond/3second/male/accessories.html?p=2
+	product - pants - https://3second.co.id/threesecond/3second/ladies.html
+	product - bags - https://id.hm.com/ladies/shop-by-product/bags.html
