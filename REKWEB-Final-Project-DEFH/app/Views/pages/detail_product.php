@@ -21,15 +21,22 @@
             <br>
             <h2 id="sub-title"><?= $product['deskripsi']; ?></h2>
             <br>
+            <?php if (session()->getFlashData('pesan')) : ?>
+                <div class="alert alert-warning mt-3" role="alert">
+                    <?= session()->getFlashData('pesan'); ?>
+                </div>
+            <?php endif; ?>
             <form action="/pages/setKeranjang" method="POST">
                 <input type="hidden" name="slug" value=<?= $product['slug']; ?>>
-                <input type="hidden" name="nama" value=<?= $product['nama']; ?>>
+                <input type="hidden" name="foto" value=<?= $product['foto']; ?>>
+                <input type="hidden" name="nama" value="<?= $product['nama']; ?>">
+                <input type="hidden" name="category" value=<?= $product['category']; ?>>
                 <input type="hidden" name="harga" value=<?= $product['harga']; ?>>
                 <h3 id="sub-title">Ukuran : </h3>
                 <div class="form-check mt-3">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="s" value="S" name="size">
-                        <label class="form-check-label" for="inlineCheckbox1"><b>S</b></label>
+                        <label class="form-check-label" for="size"><b>S</b></label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="m" value="M" name="size">
@@ -37,45 +44,49 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="l" value="L" name="size">
-                        <label class="form-check-label" for="inlineCheckbox3"><b>L</b></label>
+                        <label class="form-check-label" for="size"><b>L</b></label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="xl" value="XL" name="size">
-                        <label class="form-check-label" for="inlineCheckbox3"><b>XL</b></label>
+                        <label class="form-check-label" for="size"><b>XL</b></label>
                     </div>
                 </div>
                 <br>
                 <h3 id="sub-title">Warna : </h3>
                 <div class="form-check mt-3">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox1" value="Lapis Blue" name="warna">
+                        <input class="form-check-input" type="radio" id="warna" value="Lapis Blue" name="warna">
                         <div id="lapis-blue"></div>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="Primsoe Yellow" name="warna">
+                        <input class="form-check-input" type="radio" id="warna" value="Primsoe Yellow" name="warna">
                         <div id="primsoe-yellow"></div>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox3" value="Dimgray" name="warna">
+                        <input class="form-check-input" type="radio" id="warna" value="Dimgray" name="warna">
                         <div id="dimgray"></div>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox3" value="Black" name="warna">
+                        <input class="form-check-input" type="radio" id="warna" value="Black" name="warna">
                         <div id="black"></div>
                     </div>
                 </div>
                 <br>
                 <h3 id="sub-title">Jumlah : </h3>
-                <input type="number" name="jumlah" />
+                <input type="number" class="form-control w-50" id="jumlah" name="jumlah" value="1" onchange="generateHargaProduk(<?= $product['harga']; ?>)" />
                 <br>
 
-                <h1 class="mt-5"><span class="ket-harga">IDR </span> <b><?= $product['harga']; ?></b> <span class="ket-harga">K</span></h1>
+                <h1 class="mt-5" id="harga_produk"><span class="ket-harga">IDR </span> <b><?= $product['harga']; ?></b> <span class="ket-harga">K</span></h1>
+                <input type="hidden" name="total_price" id="total_price" value="<?= $product['harga']; ?>">
+                <input type="hidden" name="real_price" id="real_price" value="<?= $product['harga']; ?>">
                 <?php if (logged_in()) : ?>
                     <button type="submit" id="btn_keranjang" class="btn btn-success mt-3 w-100"><i class="fa fa-shopping-cart" style="margin-right: 10px;"></i>Masukan keranjang</button>
                 <?php else : ?>
                     <button id="btn_keranjang" class="btn btn-success mt-3 w-100" disabled><i class="fa fa-shopping-cart" style="margin-right: 10px;"></i>Masukan keranjang</button>
                     <br><br>
-                    <p style="color: red;"><i>Anda harus login terlebih dahulu, untuk bisa berbelanja.</i></p>
+                    <div class="alert alert-warning" style="text-align: center;" role="alert">
+                        <b>Anda belum Login...</b>
+                    </div>
                 <?php endif; ?>
             </form>
         </div>

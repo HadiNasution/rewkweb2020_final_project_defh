@@ -34,6 +34,8 @@ $routes->get('/', 'Pages::index');
 
 $routes->get('/pages/detail_category/(:any)', 'Pages::detail_category/$1');
 $routes->get('/pages/detail_product/(:any)', 'Pages::detail_product/$1');
+$routes->delete('/keranjang/(:num)', 'Pages::deleteItem/$1');
+$routes->get('/rajaongkir/kota/(:num)','Pages::kota/$1');
 $routes->get('/dashboard/create', 'Pages::create');
 $routes->get('/dashboard/edit/(:segment)', 'Pages::edit/$1');
 $routes->delete('/dashboard/(:num)','Pages::delete/$1');

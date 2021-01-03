@@ -316,3 +316,12 @@
 #diskon{
     font-size: 20px;
 }
+
+/*---- keranjang ---*/
+#demo{
+    text-align: center;
+    font-size: 100px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: rgb(255, 231, 124);
+}

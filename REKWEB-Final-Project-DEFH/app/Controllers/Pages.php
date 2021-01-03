@@ -5,6 +5,7 @@
 namespace App\Controllers;
 
 use App\Models\Product_model;
+use App\Models\Keranjang_model;
 
 class Pages extends BaseController
 {
@@ -12,6 +13,7 @@ class Pages extends BaseController
     {
         // variable referensi dari Model, disimpan di konstruktor karna akan sering dipakai
         $this->productModel = new Product_model();
+        $this->keranjangModel = new Keranjang_model();
     }
 
     //method untuk views Home
@@ -205,7 +207,7 @@ class Pages extends BaseController
 
         // untuk mendapatkan kategory produk
         $categoryFoto = $this->request->getVar('category');
-
+        
         // mendapatkan file foto dari produk baru
         $fotoProduk = $this->request->getFile('foto');
 
@@ -214,7 +216,7 @@ class Pages extends BaseController
 
         // mendapatkan nama file foto produk baru
         $namaFoto = $fotoProduk->getName();
-
+        
         // mgenerate slug baru untuk produk baru
         $slug = url_title($this->request->getVar('nama'), '-', true);
 
@@ -320,11 +322,52 @@ class Pages extends BaseController
         return redirect()->to('/pages/dashboard');
     }
 
-    public function keranjang($slug)
+    public function keranjang()
     {
+        // logic untuk fitur search
+        $keyword = $this->request->getVar('keyword');
+        if ($keyword) {
+            $product = $this->keranjangModel->search($keyword);
+        } else {
+            $product = $this->keranjangModel;
+        }
+
+        // cek ongkir
+        $kotaTujuan = $this->request->getVar('kota');
+        $kurir = $this->request->getVar('kurir');
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=23&destination=" . $kotaTujuan . "&weight=1700&courier=" . $kurir,
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded",
+                "key: 9e83f52b5c0eae123a2b7abdab5ca21c"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $response;
+            $layanan = json_decode($response,true);
+        }
+
         $data = [
             'title' => 'Keranjang | Acuk Sae',
-            'product' => $this->productModel->getProduct($slug)
+            'product' => $product->latest(),
         ];
 
         return view('pages/keranjang', $data);
@@ -332,23 +375,80 @@ class Pages extends BaseController
 
     public function setKeranjang()
     {
-        $items = [];
+        $slug = $this->request->getVar('slug');
+        $size = $this->request->getVar('size');
+        $warna = $this->request->getVar('warna');
+        $jumlah = $this->request->getVar('jumlah');
 
-        $data = [
-            'slug'  => $this->request->getVar('id'),
-            'qty'   => $this->request->getVar('jumlah'),
-            'price' => $this->request->getVar('harga'),
-            'name'  => $this->request->getVar('nama'),
-            'size'  => $this->request->getVar('size'),
-            'Color' => $this->request->getVar('warna')
-        ];
+        if($size==null | $warna==null| $jumlah==null){
+            session()->setFlashData('pesan', 'Pilih Ukuran, Warna dan Jumlah.');
+            return redirect()->to('/pages/detail_product/'.$slug);
+        }else{
+            $this->keranjangModel->save([
+                'slug'  => $slug,
+                'foto' => $this->request->getVar('foto'),
+                'jumlah'   => $this->request->getVar('jumlah'),
+                'harga' => $this->request->getVar('total_price'),
+                'harga_asli' => $this->request->getVar('real_price'),
+                'category' => $this->request->getVar('category'),
+                'nama'  => $this->request->getVar('nama'),
+                'size'  => $this->request->getVar('size'),
+                'warna' => $this->request->getVar('warna')
+            ]);
+            
 
-        dd($data);
+            // kirim session untuk pesan ke user
+            session()->setFlashData('pesan', 'Produk berhasil ditambahkan.');
 
-        // kirim session untuk pesan ke user
-        session()->setFlashData('pesan', 'Produk berhasil ditambahkan.');
+            // jika proses selesai, arahkan ke view dashboard kembali
+            return redirect()->to('/pages/keranjang');
+        }
+    }
 
-        // jika proses selesai, arahkan ke view dashboard kembali
+    public function deleteItem($id){
+        $this->keranjangModel->delete($id);
+        session()->setFlashData('pesan', 'Produk berhasil dihapus.');
         return redirect()->to('/pages/keranjang');
+    }
+
+    public function ongkir(){
+        //$data['ongkir'] = '';
+
+        
+    }
+
+    public function kota($provinsi)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/city?&province=".$provinsi,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "key: 9e83f52b5c0eae123a2b7abdab5ca21c"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $kota = json_decode($response, true);
+
+            if($kota['rajaongkir']['status']['code'] == 200){
+                foreach($kota['rajaongkir']['results'] as $kt){
+                    echo "<option value='$kt[city_id]'> $kt[city_name] </option>";
+                }
+            }
+        }
     }
 }

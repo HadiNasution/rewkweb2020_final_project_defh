@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Des 2020 pada 16.51
+-- Waktu pembuatan: 03 Jan 2021 pada 19.58
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.5
 
@@ -128,7 +128,11 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (13, '::1', 'hadinasution26@gmail.com', 1, '2020-12-27 02:29:22', 1),
 (14, '::1', 'hadinasution2656@gmail.com', 2, '2020-12-27 05:50:57', 1),
 (15, '::1', 'hadinasution26@gmail.com', 1, '2020-12-27 06:36:47', 1),
-(16, '::1', 'hadinasution2656@gmail.com', 2, '2020-12-27 08:58:36', 1);
+(16, '::1', 'hadinasution2656@gmail.com', 2, '2020-12-27 08:58:36', 1),
+(17, '::1', 'hadinasution2656@gmail.com', 2, '2021-01-01 22:38:52', 1),
+(18, '::1', 'hadinasution26@gmail.com', 1, '2021-01-01 22:39:09', 1),
+(19, '::1', 'hadinasution26@gmail.com', 1, '2021-01-02 23:34:05', 1),
+(20, '::1', 'hadinasution26@gmail.com', 1, '2021-01-03 09:25:55', 1);
 
 -- --------------------------------------------------------
 
@@ -189,6 +193,34 @@ CREATE TABLE `auth_users_permissions` (
   `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
   `permission_id` int(11) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `keranjang`
+--
+
+CREATE TABLE `keranjang` (
+  `id` int(8) NOT NULL,
+  `foto` varchar(64) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `category` varchar(64) NOT NULL,
+  `harga` int(255) NOT NULL,
+  `size` varchar(4) NOT NULL,
+  `warna` varchar(32) NOT NULL,
+  `jumlah` int(32) NOT NULL,
+  `harga_asli` int(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `keranjang`
+--
+
+INSERT INTO `keranjang` (`id`, `foto`, `slug`, `nama`, `category`, `harga`, `size`, `warna`, `jumlah`, `harga_asli`) VALUES
+(19, 'c5.jpg', 'hoodie-yellow-butter', 'Hoodie yellow butter', 'clothes', 86, 'M', 'Primsoe Yellow', 1, 86),
+(20, 'p2.jpg', 'dimgray-pants', 'Dimgray Pants', 'pants', 170, 'L', 'Black', 2, 85),
+(21, 'b5_1.jpg', 'tas-kulit-buaya-darat', 'Tas Kulit Buaya Darat', 'bags', 235, 'L', 'Black', 1, 235);
 
 -- --------------------------------------------------------
 
@@ -255,7 +287,8 @@ INSERT INTO `product` (`id`, `foto`, `nama`, `slug`, `category`, `harga`, `deskr
 (28, 'b2_1.jpg', 'Straw Bag', 'straw-bag', 'bags', 85, 'Tas ber ukuran sedang dengan material kain mikrofiber untuk menyimpan dompet, smarthphone dan barang berukuran sedang lainya.                                                ', '2020-12-22 11:28:31', '2020-12-22 11:28:31'),
 (29, 'b3_1.jpg', 'Tas Kulit Bayawak', 'tas-kulit-bayawak', 'bags', 999, 'Tas ber ukuran mini dengan material kulit bayawak sangat cocok untuk acara formal.                                                                                ', '2020-12-22 11:29:29', '2020-12-26 22:39:23'),
 (30, 'b4_1.jpg', 'Casual Sunshine Bag', 'casual-sunshine-bag', 'bags', 65, 'Tas ber ukuran sedang dengan material import sangat cocok untuk menemani acara informal anda.                                           ', '2020-12-22 11:31:58', '2020-12-22 11:31:58'),
-(31, 'b5_1.jpg', 'Tas Kulit Buaya Darat', 'tas-kulit-buaya-darat', 'bags', 235, 'Tas dengan bahan kulit buaya darat, cocok untuk acara formal dan informal.                                                ', '2020-12-22 11:33:18', '2020-12-22 11:33:18');
+(31, 'b5_1.jpg', 'Tas Kulit Buaya Darat', 'tas-kulit-buaya-darat', 'bags', 235, 'Tas dengan bahan kulit buaya darat, cocok untuk acara formal dan informal.                                                ', '2020-12-22 11:33:18', '2020-12-22 11:33:18'),
+(32, 'c6.jpg', 'Bluetone Swater Woman', 'bluetone-swater-woman', 'clothes', 75, 'Sweater dengan bahan tebal dan hangat, meterial import dan mudah untuk di cuci. Tidak memiliki kantung.                                                                                        ', '2021-01-03 09:30:08', '2021-01-03 09:42:22');
 
 -- --------------------------------------------------------
 
@@ -355,6 +388,12 @@ ALTER TABLE `auth_users_permissions`
   ADD KEY `user_id_permission_id` (`user_id`,`permission_id`);
 
 --
+-- Indeks untuk tabel `keranjang`
+--
+ALTER TABLE `keranjang`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
@@ -394,7 +433,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT untuk tabel `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `auth_permissions`
@@ -415,6 +454,12 @@ ALTER TABLE `auth_tokens`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT untuk tabel `keranjang`
+--
+ALTER TABLE `keranjang`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
@@ -424,7 +469,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
